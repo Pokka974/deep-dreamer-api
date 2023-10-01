@@ -3,7 +3,7 @@ import chatGptService from '../services/chatgpt.service';
 
 const createChatGptCompletion = async (req: Request, res: Response) => {
     try {
-        const { userInput, maxTokens = 300 } = req.body;
+        const { userInput, maxTokens = 250 } = req.body;
         const completion = await chatGptService.getCompletion(
             userInput,
             maxTokens,
