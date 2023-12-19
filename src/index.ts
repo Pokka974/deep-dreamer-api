@@ -1,6 +1,6 @@
 import express from 'express';
 import chatGptRouter from './routes/chatgpt.route';
-import dallERouter from './routes/dalle.router';
+import dallERouter from './routes/dallE.router';
 
 import cors from 'cors';
 
