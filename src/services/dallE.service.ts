@@ -9,7 +9,7 @@ const openai = new OpenAI({
 const generateDallEImage = async (dreamDescription: string) => {
     console.log(dreamDescription);
 
-    const systemPrompt = `A painting style about ${dreamDescription}. The painting should always represent the dream's subject and be spiritually uplifting, filled with harmonious colors. The overall atmosphere should be dreamlike and soothing, with a sense of otherworldly beauty.`;
+    const systemPrompt = `A painting style about ${dreamDescription}. The painting should always represent the dream's subject even if it has a negative vibe, filled with harmonious colors. The overall atmosphere should be dreamlike and soothing, with a sense of otherworldly beauty.`;
     try {
         const response = await openai.images.generate({
             model: 'dall-e-3',
