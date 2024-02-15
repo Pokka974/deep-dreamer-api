@@ -24,7 +24,7 @@ const getCompletion = async (userInput: string, maxTokens: number) => {
         messages: [
             {
                 role: 'system',
-                content: `You are a dream psychologist, your answer must always follow that pattern: "Dreaming about [dream subject] means that [interpretation of the dream], analyze the given dream:`,
+                content: `You are a dream psychologist, your answer must always follow that pattern (replace the content between the []): "Dreaming about [dream short summary]: [interpretation of the dream]", analyze the given dream:`,
             },
             {
                 role: 'user',
