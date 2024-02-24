@@ -1,14 +1,12 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
 import { OpenAI } from 'openai';
+dotenv.config();
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
 });
 
 const generateDallEImage = async (dreamDescription: string) => {
-    console.log(dreamDescription);
-
     const systemPrompt = `A painting style about ${dreamDescription}. The painting should always represent the dream's subject even if it has a negative vibe, filled with harmonious colors. The overall atmosphere should be dreamlike and soothing, with a sense of otherworldly beauty.`;
     try {
         const response = await openai.images.generate({

@@ -13,7 +13,6 @@ model User {
   password   String? // Nullable for users who register via OAuth
   provider   String // e.g., 'local', 'google', 'apple'
   providerId String? // Nullable, unique ID from the provider
-  // Additional fields as needed
   Dream      Dream[]
 }
 
