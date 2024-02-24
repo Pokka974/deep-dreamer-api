@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv';
-dotenv.config();
 import { OpenAI } from 'openai';
 import { ChatCompletionMessage } from 'openai/resources';
+dotenv.config();
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -12,10 +12,8 @@ const openai = new OpenAI({
 // const frenchPrompt =
 //     "Étant donné que l'interprétation des rêves est hautement subjective et peut dépendre de divers facteurs, fournissez une interprétation détaillée basée sur les symboles et thèmes communs pour le rêve suivant :";
 
-const getCompletion = async (userInput: string, maxTokens: number) => {
-    console.log(userInput);
-
-    if (!userInput) {
+const getCompletion = async (prompt: string) => {
+    if (!prompt) {
         return ''; // Return empty string if userInput is empty
     }
 
@@ -28,7 +26,7 @@ const getCompletion = async (userInput: string, maxTokens: number) => {
             },
             {
                 role: 'user',
-                content: userInput,
+                content: prompt,
             },
         ],
     });

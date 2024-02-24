@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int     @id @default(autoincrement())
+  email      String  @unique
+  password   String? // Nullable for users who register via OAuth
+  provider   String // e.g., 'local', 'google', 'apple'
+  providerId String? // Nullable, unique ID from the provider
+  Dream      Dream[]
+}
+
+model Dream {
+  id             Int       @id @default(autoincrement())
+  description    String
+  interpretation String
+  userId         Int
+  user           User      @relation(fields: [userId], references: [id])
+  keywords       Keyword[] // Implicit many-to-many relationship
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Keyword {
+  id             Int      @id @default(autoincrement())
+  word           String   @unique
+  interpretation String
+  dreams         Dream[] // Implicit many-to-many relationship
+  createdAt      DateTime @default(now())
+}
