@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { StatusCodes } from 'http-status-codes';
 import dallEService from '../services/dallE.service';
 
 const generateDallEImage = async (req: Request, res: Response) => {
@@ -10,7 +11,7 @@ const generateDallEImage = async (req: Request, res: Response) => {
         }
     } catch (error) {
         console.error(error);
-        res.status(500).send(
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(
             'An error occurred while processing your request.',
         );
     }
