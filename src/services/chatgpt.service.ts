@@ -1,22 +1,17 @@
+import { PrismaClient } from '.prisma/client';
 import * as dotenv from 'dotenv';
 import { OpenAI } from 'openai';
 import { ChatCompletionMessage } from 'openai/resources';
+import { logError } from './logger.service';
+const prisma = new PrismaClient();
+
 dotenv.config();
 
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-
-// const englishPrompt =
-//     "Act like you are a dream psychologist and analyze the given dreams by following those instructions: This prompt has several '/' that will split the prompt into categories. The first one is the introduction, the second one is the current dream description, the thrid one on a summary of previous dreams, the fourth one is some keywords related to previous dreams interpretations and the last one is some instructions for you. Given that dream interpretation (before the second '/') is highly subjective and can depend on a variety of factors, provide a detailed interpretation based on common symbols and themes for the following dream:";
-// const frenchPrompt =
-//     "Étant donné que l'interprétation des rêves est hautement subjective et peut dépendre de divers facteurs, fournissez une interprétation détaillée basée sur les symboles et thèmes communs pour le rêve suivant :";
-
-const getCompletion = async (prompt: string) => {
-    if (!prompt) {
-        return ''; // Return empty string if userInput is empty
-    }
-
+const getCompletion = async (
+    prompt: string,
+    openai: OpenAI,
+    userId: number,
+) => {
     const gptResponse = await openai.chat.completions.create({
         model: 'gpt-3.5-turbo',
         messages: [
@@ -32,13 +27,23 @@ const getCompletion = async (prompt: string) => {
     });
 
     const responseText: ChatCompletionMessage = gptResponse.choices[0].message;
-    const responseTextString = responseText.content;
+    const interpretation = responseText?.content;
 
-    if (responseTextString) {
-        return responseTextString;
-    } else {
+    if (!interpretation) {
+        logError('No response from GPT-3');
         throw new Error('No response from GPT-3');
     }
+
+    // Save dream to database
+    await prisma.dream.create({
+        data: {
+            description: prompt,
+            interpretation: interpretation,
+            userId,
+        },
+    });
+
+    return interpretation;
 };
 
 export default {

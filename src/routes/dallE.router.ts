@@ -23,6 +23,10 @@ const router = Router();
  *                 type: string
  *                 description: The dream description for generating the image.
  *                 example: "Create an image of a surreal landscape filled with floating clocks. The scenery is eerily enchanting, exuding an otherworldly beauty. Despite its eerie vibes, the picture is marked by a harmonious blend of colors. Resonating with the feel of a dream, the landscape is soothing and peaceful with an underlying theme of time, symbolized by the drifting clocks."
+ *               dreamId:
+ *                  type: integer
+ *                  description: The related dream's id
+ *                  example: 1
  *     responses:
  *       200:
  *         description: Image generated successfully.

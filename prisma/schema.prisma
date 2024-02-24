@@ -22,9 +22,18 @@ model Dream {
   interpretation String
   userId         Int
   user           User      @relation(fields: [userId], references: [id])
-  keywords       Keyword[] // Implicit many-to-many relationship
+  keywords       Keyword[]
+  images         DreamImage[]
   createdAt      DateTime  @default(now())
   updatedAt      DateTime  @updatedAt
+}
+
+model DreamImage {
+  id             Int       @id @default(autoincrement())
+  url            String
+  dreamId        Int
+  dream          Dream     @relation(fields: [dreamId], references: [id])
+  createdAt      DateTime  @default(now())
 }
 
 model Keyword {
