@@ -63,7 +63,9 @@ Deep Dreamer API is a RESTful API for interpreting dreams using AI models and ma
 
 ## Usage
 
-    ```
+-   Run the project with nodemon:
+
+    ```bash
     npm run start
     ```
 
