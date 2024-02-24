@@ -30,7 +30,7 @@ const createChatGptCompletion = async (req: Request, res: Response) => {
             );
         }
 
-        const { savedDream } = await chatGptService.getCompletion(
+        const savedDream = await chatGptService.getCompletion(
             prompt,
             openai,
             userId!,
@@ -40,7 +40,7 @@ const createChatGptCompletion = async (req: Request, res: Response) => {
                 savedDream.id,
             )}`,
         );
-        res.status(StatusCodes.OK).json(savedDream);
+        res.status(StatusCodes.OK).send(savedDream);
     } catch (error) {
         logError(error as string);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(

@@ -43,7 +43,7 @@ const getCompletion = async (
         },
     });
 
-    return { savedDream };
+    return savedDream;
 };
 
 export default {
