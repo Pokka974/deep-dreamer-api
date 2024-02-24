@@ -10,10 +10,10 @@ const logger = createLogger({
     transports: [
         new transports.Console(),
         new transports.File({
-            filename: './log/winston/error.log',
+            filename: './logs/winston/error.log',
             level: 'error',
         }),
-        new transports.File({ filename: './log/winston/combined.log' }),
+        new transports.File({ filename: './logs/winston/combined.log' }),
     ],
     format: combine(
         label({ label: 'DeepDreamer API' }),

@@ -8,7 +8,8 @@
         "build": "tsc",
         "serve": "node dist/index.js",
         "lint": "eslint . --ext .ts",
-        "lint:fix": "eslint . --ext .ts --fix"
+        "lint:fix": "eslint . --ext .ts --fix",
+        "prisma": "npx prisma studio"
     },
     "keywords": [],
     "author": "Julien de Fondaumière",

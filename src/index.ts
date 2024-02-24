@@ -15,10 +15,11 @@ import { logInfo } from './services/logger.service';
 
 const app = express();
 const port = process.env.PORT ?? 3000;
+
 const accessLogStream = createStream('access.log', {
     size: '10M', // rotate every 10 MegaBytes written
     interval: '1d', // rotate daily
-    path: path.join(__dirname, '../log'),
+    path: path.join(__dirname, '../logs'),
 });
 
 app.use(express.json());
