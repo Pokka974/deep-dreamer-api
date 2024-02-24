@@ -35,7 +35,7 @@ const getCompletion = async (
     }
 
     // Save dream to database
-    await prisma.dream.create({
+    const savedDream = await prisma.dream.create({
         data: {
             description: prompt,
             interpretation: interpretation,
@@ -43,7 +43,7 @@ const getCompletion = async (
         },
     });
 
-    return interpretation;
+    return { savedDream };
 };
 
 export default {

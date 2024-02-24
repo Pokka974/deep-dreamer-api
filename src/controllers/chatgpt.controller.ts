@@ -30,15 +30,17 @@ const createChatGptCompletion = async (req: Request, res: Response) => {
             );
         }
 
-        const completion = await chatGptService.getCompletion(
+        const { savedDream } = await chatGptService.getCompletion(
             prompt,
             openai,
             userId!,
         );
         logInfo(
-            `New Dream completion generated: ${JSON.stringify(completion)}`,
+            `New Dream completion generated: ID ${JSON.stringify(
+                savedDream.id,
+            )}`,
         );
-        res.status(StatusCodes.OK).json({ completion });
+        res.status(StatusCodes.OK).json(savedDream);
     } catch (error) {
         logError(error as string);
         res.status(StatusCodes.INTERNAL_SERVER_ERROR).send(
